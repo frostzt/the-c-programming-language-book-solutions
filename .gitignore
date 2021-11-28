@@ -1,0 +1,2 @@
+# Remove all binaries, Makefile must create binaries as "main"
+/**/main

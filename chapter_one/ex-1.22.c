@@ -9,26 +9,40 @@
 
 #include <stdio.h>
 
+/*** defines ***/
+
 #define MAX_LINE_LENGTH 250
 
-int getLine(char line[], int len);
+/*** prototypes ***/
+
+int getLineLength(char line[]);
+
+/*** main ***/
 
 int main() {
-  int length = 0;
   char line[MAX_LINE_LENGTH];
 
-  while ((getLine(line, length) != EOF)) {
+  while (1) {
+    int length = getLineLength(line);
+
+    for (int i = 0; i < length; i++) {
+      putchar(line[i]);
+    }
+    printf("%d\n", length);
   }
 
   return 0;
 }
 
-int getLine(char line[], int len) {
-  int c = 0;
+/*** defs ***/
 
-  while ((c = getchar()) != EOF && c != '\n') {
-    putchar(c);
+int getLineLength(char line[]) {
+  int c = 0;
+  int i;
+
+  for (i = 0; (c = getchar()) != EOF && c != '\n'; i++) {
+    line[i] = c;
   }
 
-  return c;
+  return i;
 }

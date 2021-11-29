@@ -11,7 +11,8 @@
 
 /*** defines ***/
 
-#define MAX_LINE_LENGTH 250
+#define MAX_LIMIT 1000
+#define MAX_LINE_LENGTH 10
 
 /*** prototypes ***/
 
@@ -20,15 +21,18 @@ int getLineLength(char line[]);
 /*** main ***/
 
 int main() {
-  char line[MAX_LINE_LENGTH];
+  char line[MAX_LIMIT];
 
   while (1) {
     int length = getLineLength(line);
 
+    if (length == 0) {
+      break;
+    }
+
     for (int i = 0; i < length; i++) {
       putchar(line[i]);
     }
-    printf("%d\n", length);
   }
 
   return 0;
@@ -38,10 +42,16 @@ int main() {
 
 int getLineLength(char line[]) {
   int c = 0;
-  int i;
+  int i, counter;
 
+  counter = 0;
   for (i = 0; (c = getchar()) != EOF && c != '\n'; i++) {
-    line[i] = c;
+    if (i % MAX_LINE_LENGTH == 0) {
+      line[i] = '\n';
+      counter++;
+      continue;
+    }
+    line[i + counter] = c;
   }
 
   return i;

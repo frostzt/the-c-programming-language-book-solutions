@@ -11,12 +11,13 @@
 
 /*** defines ***/
 
-#define MAX_LIMIT 1000
+#define MAX_LIMIT 5000
 #define MAX_LINE_LENGTH 10
 
 /*** prototypes ***/
 
 int getLineLength(char line[]);
+void printLine(char line[], int length);
 
 /*** main ***/
 
@@ -30,9 +31,7 @@ int main() {
       break;
     }
 
-    for (int i = 0; i < length; i++) {
-      putchar(line[i]);
-    }
+    printLine(line, length);
   }
 
   return 0;
@@ -53,4 +52,10 @@ int getLineLength(char line[]) {
   }
 
   return i;
+}
+
+void printLine(char line[], int length) {
+  for (int i = 0; i < length; i++) {
+    putchar(line[i]);
+  }
 }

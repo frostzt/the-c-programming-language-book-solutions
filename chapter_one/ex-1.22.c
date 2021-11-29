@@ -40,15 +40,11 @@ int main() {
 /*** defs ***/
 
 int getLineLength(char line[]) {
-  int c = 0;
-  int i;
+  int c, i;
 
+  c = 0;
   for (i = 0; (c = getchar()) != EOF && c != '\n'; i++) {
-    if (i != 0 && i % MAX_LINE_LENGTH == 0) {
-      line[i] = '\n';
-    } else {
-      line[i] = c;
-    }
+    line[i] = c;
   }
 
   return i;
@@ -56,6 +52,10 @@ int getLineLength(char line[]) {
 
 void printLine(char line[], int length) {
   for (int i = 0; i < length; i++) {
+    if (i != 0 && i % MAX_LINE_LENGTH == 0) {
+      putchar('\n');
+    }
+
     putchar(line[i]);
   }
 }

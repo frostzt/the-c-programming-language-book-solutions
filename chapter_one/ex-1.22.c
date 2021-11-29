@@ -42,16 +42,14 @@ int main() {
 
 int getLineLength(char line[]) {
   int c = 0;
-  int i, counter;
+  int i;
 
-  counter = 0;
   for (i = 0; (c = getchar()) != EOF && c != '\n'; i++) {
-    if (i % MAX_LINE_LENGTH == 0) {
+    if (i != 0 && i % MAX_LINE_LENGTH == 0) {
       line[i] = '\n';
-      counter++;
-      continue;
+    } else {
+      line[i] = c;
     }
-    line[i + counter] = c;
   }
 
   return i;

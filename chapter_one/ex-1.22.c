@@ -32,6 +32,7 @@ char line[MAX_LIMIT];
 /*** prototypes ***/
 
 int newposition(int pos);
+int blankPosition(int pos);
 void printLineTillNow(int uptoIndex);
 
 /*** main ***/
@@ -47,6 +48,7 @@ int main() {
       printLineTillNow(counter);
       counter = 0;
     } else if (++counter >= MAX_LINE_LENGTH) {
+      counter = blankPosition(counter);
       printLineTillNow(counter);
       counter = newposition(counter);
     }
@@ -56,6 +58,18 @@ int main() {
 }
 
 /*** defs ***/
+int blankPosition(int pos) {
+  if (pos <= 0) {
+    return MAX_LINE_LENGTH;
+  }
+  if (pos > 0) {
+    while (line[pos] != ' ') {
+      --pos;
+    }
+  }
+
+  return pos + 1;
+}
 
 void printLineTillNow(int uptoIndex) {
   for (int i = 0; i < uptoIndex; i++) {
@@ -67,12 +81,14 @@ void printLineTillNow(int uptoIndex) {
 int newposition(int pos) {
   int i, j;
 
-  if (pos <= 0 || pos >= MAX_LINE_LENGTH)
+  if (pos <= 0 || pos >= MAX_LINE_LENGTH) {
     return 0;
-  else {
+  } else {
     i = 0;
-    for (j = pos; j < MAX_LINE_LENGTH; ++j, ++i)
+    for (j = pos; j < MAX_LINE_LENGTH; ++j, ++i) {
       line[i] = line[j];
+    }
   }
+
   return i;
 }
